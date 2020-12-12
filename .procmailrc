@@ -1,0 +1,44 @@
+LOGFILE = procmail.log
+
+# Block UBC self-phishing
+:0:
+* ^X-Mailer: gophish$
+/dev/null
+
+#------------------------------------------------------------------------ 
+
+:0fw
+| spamassassin --siteconfigpath ~/.spamassassin/lib -C ~/.spamassassin/lib
+
+:0:
+* ^X-Spam-Status: Yes
+Mail/CSFILTER
+
+#------------------------------------------------------------------------ 
+
+## Fruitless attempts to stem the tide
+#:0:
+#* ^Subject: .*your supervision
+#Mail/CSFILTER
+#
+#:0:
+#* ^Subject: .*request for supervision
+#Mail/CSFILTER
+#
+#:0:
+#* ^Subject: .*Request for .* supervision
+#Mail/CSFILTER
+#
+## Probably overly aggressive
+#:0 HB
+#* .*filename=(CV\.pdf|cv\.pdf|CV_.*.pdf|cv_.*\.pdf)
+#Mail/CSFILTER
+#
+#:0
+#* B under your supervision|seeking admission
+#Mail/CSFILTER
+#
+## I never submit to IEEE, and I didn't ask for any CFPs
+#:0:
+#* ^Subject: .*CFP FOR IEEE.*
+#Mail/CSFILTER

@@ -1,0 +1,3 @@
+@daily find ~/Mail/ -type f -not -iname "CSFILTER" -not -iname "Junk" -not -iname "Trash" -exec sa-learn --mbox --ham {} +
+@daily sa-learn --mbox --spam ~/Mail/CSFILTER ~/Mail/Junk; spamassassin --siteconfigpath ~/.spamassassin/lib -C ~/.spamassassin/lib --add-to-blacklist ~/Mail/Junk#; truncate -s 0 ~/Mail/Junk
+@daily sa-update --gpghomedir ~/.spamassassin/gpg/ --updatedir ~/.spamassassin/lib/
