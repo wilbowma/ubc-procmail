@@ -8,7 +8,7 @@ LOGFILE = procmail.log
 #------------------------------------------------------------------------ 
 
 :0fw
-| spamassassin --siteconfigpath ~/.spamassassin/lib -C ~/.spamassassin/lib
+| ~wilbowma/perl5/bin/spamassassin
 
 :0:
 * ^X-Spam-Status: Yes
