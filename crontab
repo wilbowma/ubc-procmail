@@ -1,4 +1,4 @@
 PATH="/ubc/cs/home/w/wilbowma/perl5/bin${PATH:+:${PATH}}"; export PATH;
 
 @daily find ~/Mail/ -type f -not -iname "CSFILTER" -not -iname "Junk" -not -iname "Trash" -exec sa-learn --mbox --ham {} +
-@daily sa-learn --mbox --spam ~/Mail/CSFILTER ~/Mail/Junk; spamassassin --add-to-blacklist ~/Mail/Junk#; truncate -s 0 ~/Mail/Junk
+@daily sa-learn --mbox --spam ~/Mail/CSFILTER ~/Mail/Junk; spamassassin -r --add-to-blacklist ~/Mail/Junk#; truncate -s 0 ~/Mail/Junk
