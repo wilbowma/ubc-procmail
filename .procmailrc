@@ -15,8 +15,15 @@ LOGFILE = procmail.log
 #
 # However, it may also restore the validity of DKIM signatures.
 #
-#:0fw
-#| perl -00p -e 's/\A\[CAUTION: Non-UBC Email\]\n\s*\n//s' | perl -p -e 's/<span style="font-size: 12px; color: #000000; background-color: #FFECB3;"><span style="font-size: 12px; color: #000000; background-color: #FFECB3;"><span style="font-size: 12px; font-style: normal; font-weight: normal; color: #000000; background-color: #FFECB3; line-height: 1.6; padding: 3px;">\[<strong>CAUTION:<\/strong> Non-UBC Email\]<\/span><\/span><\/span>//'
+:0
+{
+  # Put a copy of the original in the trash... just in case.
+  :0c:
+  Mail/Trash
+
+  :0fw
+  | python ~wilbowma/anti-non-ubc.py
+}
 
 :0fw
 | ~wilbowma/perl5/bin/spamassassin
