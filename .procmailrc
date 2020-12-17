@@ -5,24 +5,32 @@ LOGFILE = procmail.log
 * ^X-Mailer: gophish$
 /dev/null
 
-#------------------------------------------------------------------------ 
+#------------------------------------------------------------------------
 
 # Dangerous!
 # The following code is provided without warranty of fitness for any particular purpose.
 # It might mess up your email.
-# This rewrites the message body to remove the Non-UBC warning, and if there's a
-# bug, it may render a mail unreadable by most clients.
 #
-# However, it may also restore the validity of DKIM signatures.
+# This rewrites the message body to remove the UBC-bogus security features, like
+# the Non-UBC warning and the hxxps links.
+# If there's a bug, it may render a mail unreadable by most clients.
 #
 :0
 {
-  # Put a copy of the original in the trash... just in case.
+  # Use this to keep and original around, in the trash, just in case.
+  # Comment it out if you trust me.
   :0c:
   Mail/Trash
 
+  # This filter restores the validity of DKIM signatures and should happen
+  # before SpamAssassin.
   :0fw
-  | python ~wilbowma/anti-non-ubc.py
+  | python ~wilbowma/procmail/anti-non-ubc.py
+
+  # This one can invalidate DKIM signatures, so should probably happen after
+  # SpamAssassin.
+  :0fw
+  | python ~wilbowma/procmail/un-hxxps.py
 }
 
 :0fw
