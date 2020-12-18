@@ -1,2 +1,4 @@
 @daily find ~/Mail/ -type f -not -iname "CSFILTER" -not -iname "Junk" -not -iname "Trash" -exec ~wilbowma/perl5/bin/sa-learn --mbox --ham {} +
-@daily ~wilbowma/perl5/bin/sa-learn --mbox --spam ~/Mail/CSFILTER ~/Mail/Junk; ~wilbowma/perl5/bin/spamassassin -r --add-to-blacklist ~/Mail/Junk#; truncate -s 0 ~/Mail/Junk
+@daily ~wilbowma/perl5/bin/sa-learn --mbox --spam ~/Mail/CSFILTER ~/Mail/Junk; ~wilbowma/perl5/bin/spamassassin -r --add-to-blacklist ~/Mail/Junk
+#Append this to the prior line to auto-deleted manually flagged Junk after training
+#; truncate -s 0 ~/Mail/Junk
