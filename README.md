@@ -21,3 +21,8 @@ these problems.
 - Move messages out of `CSFILTER` to any other folder to get them retrained as
   ham.
 - Maybe uncomment some of the supervision request patterns.
+- Customize `~/.spamassassin/user_prefs` if you like.
+  By default, you'll automatically get the customizations I've made in the
+  `user_prefs` file found in this repo, which notable includes crowdsourced DNS
+  allow and blocklists, and a reputation plugin which learns blocklists based on
+  your spam filed in the `Junk` folder.
