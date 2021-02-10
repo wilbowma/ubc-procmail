@@ -6,7 +6,7 @@ import re
 import base64
 
 plaintext_re = re.compile(r"\[CAUTION: Non-UBC Email\]\n\s*\n", re.MULTILINE)
-html_re = re.compile(r'<span style="font-size: 12px; color: #000000; background-color: #FFECB3;"><span style="font-size: 12px; color: #000000; background-color: #FFECB3;"><span style="font-size: 12px; font-style: normal; font-weight: normal; color: #000000; background-color: #FFECB3; line-height: 1.6; padding: 3px;">\[<strong>CAUTION:</strong> Non-UBC Email\]</span></span></span>', re.MULTILINE)
+html_re = re.compile(r'<table style="border-collapse: collapse; padding-left: 0px;"><tbody><tr><td><font style="font-family: Arial, sans-serif; font-size: 12px; font-style: normal; font-weight: normal; color: #000000; background-color: #FFECB3; line-height: 1.6; padding: 3px;">\[<strong>CAUTION:</strong> Non-UBC Email\]</font></td></tr></tbody></table>', re.MULTILINE)
 
 def filter(part):
   new_body = re.sub(html_re,'',re.sub(plaintext_re,'',part.get_payload(decode=True)))
