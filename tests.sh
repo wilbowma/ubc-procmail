@@ -28,7 +28,7 @@ python anti-non-ubc.py <$FILE | diff -a -w -B $FILE -
 check_errcode 0 "FAIL: quoted-printable must be idempotent in anti-non-ubc"
 
 # Test 2 : un_hxxps idempotent for quoted-printable
-python un_hxxps.py <$FILE | diff -a -w -B $FILE -
+python un-hxxps.py <$FILE | diff -a -w -B $FILE -
 check_errcode 0 "FAIL: quoted-printable must be idempotent in un_hxxps"
 
 
