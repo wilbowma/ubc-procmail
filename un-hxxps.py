@@ -4,11 +4,14 @@ from email.Parser import Parser
 from sys import stdin, stdout
 import re
 import base64
+import quopri
 
 def filter(part):
   new_body = re.sub(r'hxxp(s?)://',r'http\1://',part.get_payload(decode=True))
   if part.__getitem__("Content-Transfer-Encoding") == "base64":
     return base64.b64encode(new_body)
+  elif part.__getitem__("Content-Transfer-Encoding") == "quoted-printable":
+    return quopri.encodestring(new_body) 
   else:
     return new_body
 
