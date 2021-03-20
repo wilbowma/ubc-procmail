@@ -6,8 +6,8 @@ import re
 import base64
 import quopri
 
-plaintext_re = re.compile(r"\[CAUTION: Non-UBC Email\]\n\s*\n", re.MULTILINE)
-html_re = re.compile(r'<table.*?>\s*?<tbody.*?>\s*?<tr.*?>\s*?<td.*?><font.*?>\[<strong.*?>CAUTION:</strong> Non-UBC Email\]</font>\s*?</td>\s*?</tr>\s*?</tbody>\s*?</table>', re.MULTILINE)
+plaintext_re = re.compile(r"\[CAUTION: Non-UBC Email\]\s*", re.MULTILINE)
+html_re = re.compile(r'<table.*?>\s*?<tbody.*?>\s*?<tr.*?>\s*?<td.*?>\s*?<font.*?>\[<strong.*?>CAUTION:</strong> Non-UBC Email\]</font>\s*?</td>\s*?</tr>\s*?</tbody>\s*?</table>', re.MULTILINE)
 
 def filter(part):
   new_body = re.sub(html_re,'',re.sub(plaintext_re,'',part.get_payload(decode=True)))
