@@ -5,6 +5,7 @@ import tempfile
 import os
 import argparse
 import email.utils
+import re
 
 def parse_email_timestamp(raw_timestamp):
   return datetime.fromtimestamp(email.utils.mktime_tz(email.utils.parsedate_tz(raw_timestamp)))
