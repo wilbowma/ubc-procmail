@@ -14,6 +14,8 @@ parser = argparse.ArgumentParser(description='Get only the most recent files fro
 parser.add_argument('mboxs', metavar="f", type=str, nargs='+', help="an mbox file to search")
 ns = parser.parse_args()
 
+tmpf = tempfile.NamedTemporaryFile()
+output = mailbox.mbox(tmpf.name, create=True)
 for mbox in ns.mboxs:
   messages = mailbox.mbox(mbox)
   for msg in messages:
@@ -24,10 +26,11 @@ for mbox in ns.mboxs:
       raw_timestamp = re.sub("^From \w+? ", "", str(msg).partition("\n")[0])
     try:
       if parse_email_timestamp(raw_timestamp) > datetime.now()-timedelta(hours=36):
-        print(msg)
+        output.add(msg)
     # if parsing a timestamp fails, log it, but just ignore that message.
     # ignoring a few messages is fine, since we're just using this for training
     # the spam filter.
     except Exception:
       sys.stderr.write("Exception while parsing Timestamp: \n  " + raw_timestamp)
       pass
+print(tmpf.read())
