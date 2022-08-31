@@ -3,16 +3,20 @@
 UBC CS has several different versions of SpamAssassin installed, making it
 difficult to configure the global site version to run machine that runs
 procmail.
-remote.cs.ubc.ca has version 3.4.2, while gypsytears.cs.ubc.ca uses 3.3.1, and
-they're configuration are apparently incompatible.
 
 I've installed SpamAssassin locally on my home directory which should avoid
 these problems.
 
-- Run `init-spamassassin.sh` on `remote.cs.ubc.ca` to get the environment
+To setup SpamAssassin, you must install the following (particularly the cron
+job) on `kokanee.cs.ubc.ca`.
+Most of the files can be edited from any of the remote machine, but currently
+only `kokanee` has access to the INBOX folder, which is necessary for training
+the classifier.
+
+- Run `init-spamassassin.sh` on `kokanee.cs.ubc.ca` to get the environment
   variables setup to use my version of SpamAssassin.
   This will install environment variables in `.bashrc`.
-- Add the contents of `crontab` to your crontab.
+- Add the contents of `crontab` to your crontab, on `kokanee.cs.ubc.ca`.
 - Add the contents of `.procmailrc` to your `.procmailrc`, preferably near the
   top.
 - Save messages to the `Junk` folder to train the spam filter, and autoblock
