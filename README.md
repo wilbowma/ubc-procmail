@@ -29,3 +29,11 @@ the classifier.
   `user_prefs` file found in this repo, which notably includes crowdsourced DNS
   allow and blocklists, and a reputation plugin which learns blocklists based on
   your spam filed in the `Junk` folder.
+
+
+## Debugging
+- Note that after a change to some of the remote machines, you may need to move
+  your crontab from one to another. Pay attention to emails from tech that
+  affect kokanee or remote.
+- After a system upgrade, I may need to run `cpan -r`, if the Perl binary or
+  standard libraries have been upgraded.
