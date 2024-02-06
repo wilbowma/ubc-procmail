@@ -36,4 +36,5 @@ the classifier.
   your crontab from one to another. Pay attention to emails from tech that
   affect kokanee or remote.
 - After a system upgrade, I may need to run `cpan -r`, if the Perl binary or
-  standard libraries have been upgraded.
+  standard libraries have been upgraded. In that case, also run `chmod -R go+xR
+  perl5` to fix permissions.
