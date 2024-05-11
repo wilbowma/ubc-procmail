@@ -7,7 +7,7 @@ import base64
 import quopri
 
 def filter(part):
-  new_body = re.sub(r'hxxp(s?)://',r'http\1://',part.get_payload(decode=True))
+  new_body = re.sub(r'h[xX]{2}p(s?)://',r'http\1://',part.get_payload(decode=True))
   if part.__getitem__("Content-Transfer-Encoding") == "base64":
     return base64.b64encode(new_body)
   elif part.__getitem__("Content-Transfer-Encoding") == "quoted-printable":
