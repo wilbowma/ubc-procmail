@@ -9,13 +9,13 @@ problems.
 To set up SpamAssassin with procmail, you must install the following
 (particularly the cron job) on `kokanee.cs.ubc.ca`.
 Most of the files can be edited from any of the remote machine, but currently
-only `kokanee` has access to the INBOX folder, which is necessary for training
+only `rubytears` has access to the INBOX folder, which is necessary for training
 the classifier.
 
-- Run `init-spamassassin.sh` on `kokanee.cs.ubc.ca` to get the environment
+- Run `init-spamassassin.sh` on `rubytears.cs.ubc.ca` to get the environment
   variables setup to use my version of SpamAssassin.
   This installs environment variables in `.bashrc`.
-- Add the contents of `crontab` to your crontab, on `kokanee.cs.ubc.ca`.
+- Add the contents of `crontab` to your crontab, on `rubytears.cs.ubc.ca`.
 - Add the contents of `.procmailrc` to your `.procmailrc`, preferably near the
   top.
 - Save messages to the `Junk` folder to train the spam filter, and autoblock
@@ -34,7 +34,7 @@ the classifier.
 ## Debugging
 - Note that after a change to some of the remote machines, you may need to move
   your crontab from one to another. Pay attention to emails from tech that
-  affect kokanee or remote.
+  affect rubytears or remote.
 - After a system upgrade, I may need to run `cpan -r`, if the Perl binary or
   standard libraries have been upgraded. In that case, also run `chmod -R go+Xr
   perl5` to fix permissions.

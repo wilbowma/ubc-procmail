@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 
-from email.Parser import Parser
+from email.parser import Parser
 from sys import stdin, stdout
 import re
 import base64
 import quopri
 
-plaintext_re = re.compile(r"\[CAUTION: Non-UBC Email\]\s*", re.MULTILINE)
-html_re = re.compile(r'<table.*?>\s*?<tbody.*?>\s*?<tr.*?>\s*?<td.*?>\s*?<font.*?>\[<strong.*?>CAUTION:</strong> Non-UBC Email\]</font>\s*?</td>\s*?</tr>\s*?</tbody>\s*?</table>', re.MULTILINE)
+plaintext_re = re.compile(br"\[CAUTION: Non-UBC Email\]\s*", re.MULTILINE)
+html_re = re.compile(br'<table.*?>\s*?<tbody.*?>\s*?<tr.*?>\s*?<td.*?>\s*?<font.*?>\[<strong.*?>CAUTION:</strong> Non-UBC Email\]</font>\s*?</td>\s*?</tr>\s*?</tbody>\s*?</table>', re.MULTILINE)
 
 def filter(part):
-  new_body = re.sub(html_re,'',re.sub(plaintext_re,'',part.get_payload(decode=True)))
+  new_body = re.sub(html_re,b'',re.sub(plaintext_re,b'',part.get_payload(decode=True)))
   if part.__getitem__("Content-Transfer-Encoding") == "base64":
     return base64.b64encode(new_body)
   elif part.__getitem__("Content-Transfer-Encoding") == "quoted-printable":
