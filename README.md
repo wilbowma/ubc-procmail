@@ -7,7 +7,7 @@ I installed SpamAssassin locally on my home directory which should avoid these
 problems.
 
 To set up SpamAssassin with procmail, you must install the following
-(particularly the cron job) on `kokanee.cs.ubc.ca`.
+(particularly the cron job) on `rubytears.cs.ubc.ca`.
 Most of the files can be edited from any of the remote machine, but currently
 only `rubytears` has access to the INBOX folder, which is necessary for training
 the classifier.
