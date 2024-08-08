@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser(description='Get only the most recent files fro
 parser.add_argument('mboxs', metavar="f", type=str, nargs='+', help="an mbox file to search")
 ns = parser.parse_args()
 
-tmpf = tempfile.NamedTemporaryFile()
+tmpf = tempfile.NamedTemporaryFile('w+', encoding="utf-8")
 output = mailbox.mbox(tmpf.name, create=True)
 for mbox in ns.mboxs:
   messages = mailbox.mbox(mbox)
