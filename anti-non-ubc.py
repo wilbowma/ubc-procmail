@@ -10,10 +10,10 @@ plaintext_re = re.compile(br"\[CAUTION: Non-UBC Email\]\s*", re.MULTILINE)
 html_re = re.compile(br'<table.*?>\s*?<tbody.*?>\s*?<tr.*?>\s*?<td.*?>\s*?<font.*?>\[<strong.*?>CAUTION:</strong> Non-UBC Email\]</font>\s*?</td>\s*?</tr>\s*?</tbody>\s*?</table>', re.MULTILINE)
 
 def filter(part):
-  new_body = re.sub(html_re,b'',re.sub(plaintext_re,b'',part.get_payload(decode=True)))
-  if part.__getitem__("Content-Transfer-Encoding") == "base64":
+  new_body = re.sub(html_re,b'',re.sub(plaintext_re,b'',part.get_payload(decode=True),count=1),count=1)
+  if part["Content-Transfer-Encoding"] == "base64":
     return base64.b64encode(new_body)
-  elif part.__getitem__("Content-Transfer-Encoding") == "quoted-printable":
+  elif part["Content-Transfer-Encoding"] == "quoted-printable":
     return quopri.encodestring(new_body)
   else:
     return new_body
